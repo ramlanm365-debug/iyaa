@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>I Love You Mobile Flow</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #ui {
+            position: relative;
+            /* Ukuran dasar untuk koordinat gerakan di HP */
+            width: 100%;
+            height: 100%;
+        }
+
+        .love {
+            position: absolute;
+            /* Titik awal di tengah layar */
+            top: 50%;
+            left: 50%;
+            /* Offset agar posisi benar-benar center sebelum bergerak */
+            margin-top: -150px; 
+            margin-left: -150px;
+        }
+
+        /* Gerakan Kiri-Kanan */
+        .love_horizontal {
+            animation: horizontal 10s infinite alternate ease-in-out;
+        }
+
+        /* Gerakan Atas-Bawah (Pola Hati) */
+        .love_vertical {
+            animation: vertical 20s infinite linear;
+        }
+
+        .love_word {
+            color: #ea80b0;
+            text-shadow: 0 0 10px #ea80b0, 0 0 5px #fff;
+            font-size: 1rem;
+            font-family: sans-serif;
+            font-weight: bold;
+            white-space: nowrap;
+            /* Rotasi sedikit agar estetik */
+            transform: rotate(-20deg);
+        }
+
+        /* Animasi Horizontal: Bergerak menyamping */
+        @keyframes horizontal {
+            from { transform: translateX(0px); }
+            to { transform: translateX(300px); } /* Disesuaikan lebar HP */
+        }
+
+        /* Animasi Vertical: Mengikuti lekukan hati */
+        @keyframes vertical {
+            0% { transform: translateY(120px); }
+            10% { transform: translateY(30px); }
+            15% { transform: translateY(3px); }
+            18% { transform: translateY(0px); }
+            20% { transform: translateY(3px); }
+            22% { transform: translateY(23px); }
+            24% { transform: translateY(43px); }
+            25% { transform: translateY(75px); }
+            26% { transform: translateY(43px); }
+            28% { transform: translateY(23px); }
+            30% { transform: translateY(3px); }
+            32% { transform: translateY(0px); }
+            35% { transform: translateY(3px); }
+            40% { transform: translateY(30px); }
+            50% { transform: translateY(120px); }
+            71% { transform: translateY(285px); }
+            72.5% { transform: translateY(294px); }
+            75% { transform: translateY(300px); }
+            77.5% { transform: translateY(294px); }
+            79% { transform: translateY(285px); }
+            100% { transform: translateY(120px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui"></div>
+
+    <script>
+        const ui = document.getElementById('ui');
+        // Membuat 50 teks agar aliran "I Love You" terlihat menyambung
+        const total = 50; 
+
+        for (let i = 0; i < total; i++) {
+            const loveDiv = document.createElement('div');
+            loveDiv.className = 'love';
+
+            // Memberikan delay bertahap agar teks berbaris mengikuti satu sama lain
+            const delay = (i * -400) + 'ms';
+
+            loveDiv.innerHTML = `
+                <div class="love_horizontal" style="animation-delay: ${delay}">
+                    <div class="love_vertical" style="animation-delay: ${delay}">
+                        <div class="love_word">I Love You</div>
+                    </div>
+                </div>
+            `;
+            ui.appendChild(loveDiv);
+        }
+    </script>
+</body>
+</html>
